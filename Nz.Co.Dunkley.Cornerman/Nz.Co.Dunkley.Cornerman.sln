@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Tests", "Unit Tests", "{1CC87A78-DED2-4463-AAD5-C249F73691B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration Tests", "Integration Tests", "{3EE215A2-1C6E-4FB2-B6D1-C75A4F49BBD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nz.Co.Dunkley.Cornerman.Site", "Nz.Co.Dunkley.Cornerman.Site\Nz.Co.Dunkley.Cornerman.Site.csproj", "{BDEDEAF4-6D03-428D-AE4F-8AEEB95A0AAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDEDEAF4-6D03-428D-AE4F-8AEEB95A0AAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDEDEAF4-6D03-428D-AE4F-8AEEB95A0AAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDEDEAF4-6D03-428D-AE4F-8AEEB95A0AAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDEDEAF4-6D03-428D-AE4F-8AEEB95A0AAF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
