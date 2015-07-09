@@ -114,6 +114,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\RideRepositoryTests.cs" />
+    <Compile Include="Repositories\RidePointRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

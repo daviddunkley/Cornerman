@@ -16,5 +16,6 @@
 
         Task<RidePoint> Retrieve(Guid riderId, DateTime pointDateTime);
         Task<List<RidePoint>> RetrieveForRiderId(Guid riderId);
+        Task Delete(Guid riderId, DateTime pointDateTime);
     }
 }

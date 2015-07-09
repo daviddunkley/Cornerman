@@ -102,5 +102,17 @@
 
             return results;
         }
+
+        public async Task Delete(Guid riderId, DateTime pointDateTime)
+        {
+            var entity = new RidePointEntity()
+            {
+                PartitionKey = riderId.ToString(),
+                RowKey = pointDateTime.ToString("u"),
+                ETag = "*",
+            };
+            var operation = TableOperation.Delete(entity);
+            await _table.ExecuteAsync(operation);
+        }
     }
 }
