@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nz.Co.Dunkley.Cornerman.Sit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nz.Co.Dunkley.Cornerman.Api", "Nz.Co.Dunkley.Cornerman.Api\Nz.Co.Dunkley.Cornerman.Api.csproj", "{2D969385-7CDD-47AD-BE9B-B2B946E362EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nz.Co.Dunkley.Cornerman.Api.IntegrationTests", "Nz.Co.Dunkley.Cornerman.Api.IntegrationTests\Nz.Co.Dunkley.Cornerman.Api.IntegrationTests.csproj", "{3FACB4EC-1A6B-4DFD-8AFC-2720BFCF8B38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,8 +27,15 @@ Global
 		{2D969385-7CDD-47AD-BE9B-B2B946E362EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D969385-7CDD-47AD-BE9B-B2B946E362EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D969385-7CDD-47AD-BE9B-B2B946E362EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FACB4EC-1A6B-4DFD-8AFC-2720BFCF8B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FACB4EC-1A6B-4DFD-8AFC-2720BFCF8B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FACB4EC-1A6B-4DFD-8AFC-2720BFCF8B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FACB4EC-1A6B-4DFD-8AFC-2720BFCF8B38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3FACB4EC-1A6B-4DFD-8AFC-2720BFCF8B38} = {3EE215A2-1C6E-4FB2-B6D1-C75A4F49BBD8}
 	EndGlobalSection
 EndGlobal
