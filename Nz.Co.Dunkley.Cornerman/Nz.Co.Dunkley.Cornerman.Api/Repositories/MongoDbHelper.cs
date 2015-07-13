@@ -1,5 +1,6 @@
 ﻿namespace Nz.Co.Dunkley.Cornerman.Api.Repositories
 {
+    using MongoDB.Bson;
     using MongoDB.Driver;
 
     public class MongoDbHelper
@@ -10,7 +11,18 @@
         {
             _client = new MongoClient();
 
-            return _client.GetDatabase("Cornerman");
+            var database = _client.GetDatabase("Cornerman");
+
+            var collection = database.GetCollection<BsonDocument>("Rides");
+
+            var keys = Builders<BsonDocument>.IndexKeys.Ascending("RideId");
+
+            collection.Indexes.CreateOneAsync(keys, new CreateIndexOptions() { Unique = true, });
+
+            keys = Builders<BsonDocument>.IndexKeys.Ascending("Title");
+            collection.Indexes.CreateOneAsync(keys, new CreateIndexOptions() { Unique = true, });
+
+            return database;
         }
     }
 }

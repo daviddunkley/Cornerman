@@ -28,9 +28,11 @@ namespace Nz.Co.Dunkley.Cornerman.Api.Services
             return ride;
         }
 
-        public Task<List<Ride>> RetrieveForMembershipId(string membershipId)
+        public async Task<List<Ride>> RetrieveForMembershipId(string membershipId)
         {
-            throw new NotImplementedException();
+            var rides = await _rideRepository.RetrieveForMembershipId(membershipId);
+
+            return rides;
         }
 
         public async Task Update(Ride ride)

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
     using Models;
@@ -20,13 +21,6 @@
                 .GetCollection<BsonDocument>("Rides");
 
             await collection.InsertOneAsync(rideDocument);
-
-            var keys = Builders<BsonDocument>.IndexKeys.Ascending("RideId");
-            await collection.Indexes.CreateOneAsync(keys);
-
-            keys = Builders<BsonDocument>.IndexKeys.Ascending("Title");
-            await collection.Indexes.CreateOneAsync(keys);
-
         }
 
         public async Task<Ride> Retrieve(string rideId)

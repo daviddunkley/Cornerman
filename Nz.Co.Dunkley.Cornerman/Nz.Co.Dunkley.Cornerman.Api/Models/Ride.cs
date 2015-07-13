@@ -2,12 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using MongoDB.Bson;
 
     [Serializable]
     public class Ride
     {
         public Ride()
         {
+            _id = ObjectId.GenerateNewId().ToString();
             Wingmen = new List<Rider>();
             Riders = new List<Rider>();
         }
