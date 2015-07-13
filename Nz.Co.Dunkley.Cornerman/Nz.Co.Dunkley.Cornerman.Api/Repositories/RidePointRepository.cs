@@ -17,7 +17,7 @@
         }
 
         public async Task CreateOrUpdate(
-            Guid riderId, 
+            string riderId, 
             DateTime pointDateTime, 
             double altitude, 
             double longitude, 
@@ -25,7 +25,7 @@
         {
             var entity = new RidePointEntity()
             {
-                PartitionKey = riderId.ToString(),
+                PartitionKey = riderId,
                 RowKey = pointDateTime.ToString("u"),
                 Altitude = altitude,
                 Latitude = latitude,
@@ -38,10 +38,10 @@
             await _table.ExecuteAsync(operation);
         }
 
-        public async Task<RidePoint> Retrieve(Guid riderId, DateTime pointDateTime)
+        public async Task<RidePoint> Retrieve(string riderId, DateTime pointDateTime)
         {
             var operation = TableOperation.Retrieve<RidePointEntity>(
-                riderId.ToString(),
+                riderId,
                 pointDateTime.ToString("u")
                 );
 
@@ -62,12 +62,12 @@
             return ridePoint;
         }
 
-        public async Task<List<RidePoint>> RetrieveForRiderId(Guid riderId)
+        public async Task<List<RidePoint>> RetrieveForRiderId(string riderId)
         {
             var filter = TableQuery.GenerateFilterCondition(
                 "PartitionKey",
                 QueryComparisons.Equal,
-                riderId.ToString()
+                riderId
                 );
 
             var query = new TableQuery<RidePointEntity>().Where(filter);
@@ -103,11 +103,11 @@
             return results;
         }
 
-        public async Task Delete(Guid riderId, DateTime pointDateTime)
+        public async Task Delete(string riderId, DateTime pointDateTime)
         {
             var entity = new RidePointEntity()
             {
-                PartitionKey = riderId.ToString(),
+                PartitionKey = riderId,
                 RowKey = pointDateTime.ToString("u"),
                 ETag = "*",
             };

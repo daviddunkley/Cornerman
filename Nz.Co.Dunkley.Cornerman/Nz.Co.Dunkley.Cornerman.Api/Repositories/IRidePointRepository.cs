@@ -8,14 +8,14 @@
     public interface IRidePointRepository
     {
         Task CreateOrUpdate(
-            Guid riderId,
+            string riderId,
             DateTime pointDateTime,
             double altitude,
             double longitude,
             double latitude);
 
-        Task<RidePoint> Retrieve(Guid riderId, DateTime pointDateTime);
-        Task<List<RidePoint>> RetrieveForRiderId(Guid riderId);
-        Task Delete(Guid riderId, DateTime pointDateTime);
+        Task<RidePoint> Retrieve(string riderId, DateTime pointDateTime);
+        Task<List<RidePoint>> RetrieveForRiderId(string riderId);
+        Task Delete(string riderId, DateTime pointDateTime);
     }
 }

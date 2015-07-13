@@ -3,12 +3,10 @@
 namespace Nz.Co.Dunkley.Cornerman.Api.IntegrationTests.Repositories
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using Api.Repositories;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Models;
-    using MongoRepository;
     using Ploeh.AutoFixture;
 
     [TestClass]

@@ -5,39 +5,37 @@ namespace Nz.Co.Dunkley.Cornerman.Api.Services
     using System.Threading.Tasks;
     using Models;
     using MongoDB.Bson;
-    using MongoRepository;
     using Repositories;
 
     public class RideServices : IRideServices
     {
-        private readonly MongoRepository<Ride> _rideRepository;
+        private readonly IRideRepository _rideRepository;
 
-        public RideServices(
-            MongoRepository<Ride> rideRepository = null)
+        public RideServices(IRideRepository rideRepository = null)
         {
-            _rideRepository = rideRepository ?? new MongoRepository<Ride>();
+            _rideRepository = rideRepository ?? new RideRepository();
         }
 
-        public Ride Create(Ride ride)
+        public async Task Create(Ride ride)
         {
-            return _rideRepository.Add(ride);
+            await _rideRepository.Create(ride);
         }
 
-        public Ride Retrieve(ObjectId rideId)
+        public async Task<Ride> Retrieve(string rideId)
         {
-            var ride = _rideRepository.GetById(rideId);
+            var ride = await _rideRepository.Retrieve(rideId);
 
             return ride;
         }
 
-        public List<Ride> RetrieveForMembershipId(Guid membershipId)
+        public Task<List<Ride>> RetrieveForMembershipId(string membershipId)
         {
             throw new NotImplementedException();
         }
 
-        public Ride Update(Ride ride)
+        public async Task Update(Ride ride)
         {
-            return _rideRepository.Update(ride);
+            await _rideRepository.Update(ride);
         }
     }
 }

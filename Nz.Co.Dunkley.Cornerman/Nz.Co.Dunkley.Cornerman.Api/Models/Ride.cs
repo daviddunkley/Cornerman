@@ -2,10 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using MongoDB.Bson;
-    using MongoRepository;
 
-    public class Ride : Entity
+    [Serializable]
+    public class Ride
     {
         public Ride()
         {
@@ -13,9 +12,11 @@
             Riders = new List<Rider>();
         }
 
-        public Guid RideId { get; set; }
-        public BsonDateTime StartDateTime { get; set; }
-        public BsonDateTime CompletedDateTime { get; set; }
+        public string _id { get; set; }
+        public string RideId { get; set; }
+        public string Title { get; set; }
+        public DateTime StartDateTime { get; set; }
+        public DateTime CompletedDateTime { get; set; }
         public Rider Lead { get; set; }
         public Rider Tailgunner { get; set; }
         public List<Rider> Wingmen { get; set; }

@@ -15,7 +15,7 @@
             _ridePointRepository = ridePointRepository ?? new RidePointRepository();
         }
 
-        public async Task Create(Guid riderId, RidePoint ridePoint)
+        public async Task Create(string riderId, RidePoint ridePoint)
         {
             await _ridePointRepository.CreateOrUpdate(
                 riderId,
@@ -25,7 +25,7 @@
                 ridePoint.Latitude);
         }
 
-        public async Task<List<RidePoint>> RetrieveForRiderId(Guid riderId)
+        public async Task<List<RidePoint>> RetrieveForRiderId(string riderId)
         {
             var ridePoints = await _ridePointRepository.RetrieveForRiderId(riderId);
 

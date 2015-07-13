@@ -7,7 +7,7 @@
 
     public interface IRidePointService
     {
-        Task Create(Guid riderId, RidePoint ridePoint);
-        Task<List<RidePoint>> RetrieveForRiderId(Guid riderId);
+        Task Create(string riderId, RidePoint ridePoint);
+        Task<List<RidePoint>> RetrieveForRiderId(string riderId);
     }
 }
