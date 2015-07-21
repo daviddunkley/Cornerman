@@ -33,19 +33,21 @@ namespace Nz.Co.Dunkley.Cornerman.Api.IntegrationTests.Repositories
                 .Build<Rider>()
                 .Create();
 
+            string ridePointId = "";
+
             try
             {
 
                 // ACT – Execute the actual functionality being tested
-                _ridePointRepository.CreateOrUpdate(
+                ridePointId = _ridePointRepository.CreateOrUpdate(
                     expectedRider.RiderId,
                     expected.PointDateTime,
                     expected.Altitude,
                     expected.Longitude,
-                    expected.Latitude).GetAwaiter().GetResult();
+                    expected.Latitude);
 
                 // ASSERT – check that the results of the test are as expected
-                var actual = _ridePointRepository.Retrieve(expectedRider.RiderId, expected.PointDateTime).Result;
+                var actual = _ridePointRepository.Retrieve(expectedRider.RiderId, ridePointId);
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(actual.Altitude, expected.Altitude);
                 Assert.AreEqual(actual.Longitude, expected.Longitude);
@@ -54,7 +56,7 @@ namespace Nz.Co.Dunkley.Cornerman.Api.IntegrationTests.Repositories
             finally
             {
                 // TEAR-DOWN
-                _ridePointRepository.Delete(expectedRider.RiderId, expected.PointDateTime).GetAwaiter().GetResult();
+                _ridePointRepository.Delete(expectedRider.RiderId, ridePointId);
             }
         }
 
@@ -78,13 +80,13 @@ namespace Nz.Co.Dunkley.Cornerman.Api.IntegrationTests.Repositories
                     expectedRidePoint.PointDateTime,
                     expectedRidePoint.Altitude,
                     expectedRidePoint.Longitude,
-                    expectedRidePoint.Latitude).GetAwaiter().GetResult();
+                    expectedRidePoint.Latitude);
             }
 
             try
             {
                 // ACT – Execute the actual functionality being tested
-                var actual = _ridePointRepository.RetrieveForRiderId(expectedRider.RiderId).Result;
+                var actual = _ridePointRepository.RetrieveForRiderId(expectedRider.RiderId);
 
                 // ASSERT – check that the results of the test are as expected
                 Assert.IsNotNull(actual);
@@ -107,10 +109,7 @@ namespace Nz.Co.Dunkley.Cornerman.Api.IntegrationTests.Repositories
             finally
             {
                 // TEAR-DOWN
-                foreach (var expectedRidePoint in expected)
-                {
-                    _ridePointRepository.Delete(expectedRider.RiderId, expectedRidePoint.PointDateTime).GetAwaiter().GetResult();
-                }
+                _ridePointRepository.DeleteForRiderId(expectedRider.RiderId);
             }            
         }
     }

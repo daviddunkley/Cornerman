@@ -140,6 +140,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config" />
+    <None Include="Properties\PublishProfiles\cornerman.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -155,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiControllers\RideController.cs" />
+    <Compile Include="ApiControllers\RidePointController.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -163,16 +165,16 @@
     <Compile Include="Models\RidePoint.cs" />
     <Compile Include="Models\Rider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\AzureStorageHelper.cs" />
+    <Compile Include="Repositories\AzureStorageContext.cs" />
     <Compile Include="Repositories\IRidePointRepository.cs" />
     <Compile Include="Repositories\IRideRepository.cs" />
-    <Compile Include="Repositories\MongoDbHelper.cs" />
+    <Compile Include="Repositories\MongoDbContext.cs" />
     <Compile Include="Repositories\RidePointEntity.cs" />
     <Compile Include="Repositories\RidePointRepository.cs" />
-    <Compile Include="Repositories\RideRepository.cs" />
-    <Compile Include="Services\IRidePointService.cs" />
+    <Compile Include="Repositories\RideRepositoryMongoDb.cs" />
+    <Compile Include="Services\IRidePointServices.cs" />
     <Compile Include="Services\IRideServices.cs" />
-    <Compile Include="Services\RidePointService.cs" />
+    <Compile Include="Services\RidePointServices.cs" />
     <Compile Include="Services\RideServices.cs" />
   </ItemGroup>
   <ItemGroup>

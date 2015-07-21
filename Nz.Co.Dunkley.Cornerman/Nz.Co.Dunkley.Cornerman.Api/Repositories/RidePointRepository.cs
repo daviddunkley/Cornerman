@@ -9,14 +9,14 @@
 
     public class RidePointRepository : IRidePointRepository
     {
-        private readonly CloudTable _table;
+        private readonly AzureStorageContext _azureStorageContext;
 
-        public RidePointRepository()
+        public RidePointRepository(AzureStorageContext azureStorageContext = null)
         {
-            _table = AzureStorageHelper.CreateTable("RiderPoints");
+            _azureStorageContext = azureStorageContext ?? new AzureStorageContext();
         }
 
-        public async Task CreateOrUpdate(
+        public string CreateOrUpdate(
             string riderId, 
             DateTime pointDateTime, 
             double altitude, 
@@ -26,7 +26,7 @@
             var entity = new RidePointEntity()
             {
                 PartitionKey = riderId,
-                RowKey = pointDateTime.ToString("u"),
+                RowKey = pointDateTime.Ticks.ToString(),
                 Altitude = altitude,
                 Latitude = latitude,
                 Longitude = longitude,
@@ -35,17 +35,18 @@
 
             var operation = TableOperation.InsertOrMerge(entity);
 
-            await _table.ExecuteAsync(operation);
+            _azureStorageContext.RiderPointsTable.ExecuteAsync(operation).GetAwaiter().GetResult();
+
+            return entity.RowKey;
         }
 
-        public async Task<RidePoint> Retrieve(string riderId, DateTime pointDateTime)
+        public RidePoint Retrieve(string riderId, string ridePointId)
         {
             var operation = TableOperation.Retrieve<RidePointEntity>(
                 riderId,
-                pointDateTime.ToString("u")
-                );
+                ridePointId);
 
-            var tableResult = await _table.ExecuteAsync(operation);
+            var tableResult = _azureStorageContext.RiderPointsTable.ExecuteAsync(operation).Result;
 
             var ridePointEntity = tableResult.Result as RidePointEntity;
             if (ridePointEntity == null)
@@ -62,7 +63,7 @@
             return ridePoint;
         }
 
-        public async Task<List<RidePoint>> RetrieveForRiderId(string riderId)
+        public List<RidePoint> RetrieveForRiderId(string riderId)
         {
             var filter = TableQuery.GenerateFilterCondition(
                 "PartitionKey",
@@ -78,7 +79,7 @@
             do
             {
                 TableQuerySegment<RidePointEntity> querySegment =
-                    await _table.ExecuteQuerySegmentedAsync(query, continuationToken);
+                    _azureStorageContext.RiderPointsTable.ExecuteQuerySegmentedAsync(query, continuationToken).Result;
 
                 if (querySegment.Results != null)
                 {
@@ -103,16 +104,27 @@
             return results;
         }
 
-        public async Task Delete(string riderId, DateTime pointDateTime)
+        public void Delete(string riderId, string ridePointId)
         {
             var entity = new RidePointEntity()
             {
                 PartitionKey = riderId,
-                RowKey = pointDateTime.ToString("u"),
+                RowKey = ridePointId,
                 ETag = "*",
             };
+
             var operation = TableOperation.Delete(entity);
-            await _table.ExecuteAsync(operation);
+            _azureStorageContext.RiderPointsTable.ExecuteAsync(operation).GetAwaiter().GetResult();
+        }
+
+        public void DeleteForRiderId(string riderId)
+        {
+            var ridePoints = RetrieveForRiderId(riderId);
+
+            foreach (var ridePoint in ridePoints)
+            {
+                Delete(riderId, ridePoint.PointDateTime.Ticks.ToString());
+            }
         }
     }
 }
