@@ -42,7 +42,7 @@ namespace Nz.Co.Dunkley.Cornerman.Api.IntegrationTests.Repositories
                 Assert.IsNotNull(actual);
 
                 Assert.Less(Math.Abs(actual.StartDateTime.Ticks - expected.StartDateTime.Ticks), 10000);
-                Assert.Less(Math.Abs(actual.CompletedDateTime.Ticks - expected.CompletedDateTime.Ticks), 10000);
+                Assert.Less(Math.Abs((actual.CompletedDateTime ?? DateTime.MaxValue).Ticks - (expected.CompletedDateTime ?? DateTime.MaxValue).Ticks), 10000);
                 Assert.AreEqual(actual.Lead.MembershipId, expected.Lead.MembershipId);
                 Assert.AreEqual(actual.Tailgunner.MembershipId, expected.Tailgunner.MembershipId);
 
